@@ -32,14 +32,10 @@ paths:
           description: Success Response
           schema:
             $ref: "#/definitions/GetCourierPositionResponse"
-        "204":
+        "404":
           description: Not found
           schema:
             $ref: "#/definitions/GetNotFoundResponse"
-        "500":
-          description: Internal Error
-          schema:
-            $ref: "#/definitions/GetErrorContent"
 
   /courier/totalDistance/{courierId}:
     get:
