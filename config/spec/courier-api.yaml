@@ -60,6 +60,24 @@ paths:
           schema:
             $ref: "#/definitions/GetNotFoundResponse"
 
+  /courier/totalDistance:
+    get:
+      tags:
+        - All courier total distance
+      summary: "Get position of all courier"
+      description:
+        Get all current
+      operationId: getAllCourierTotalDistance
+      responses:
+        "200":
+          description: Success Response
+          schema:
+            $ref: "#/definitions/GetAllCourierTotalDistanceResponse"
+        "404":
+          description: Not found
+          schema:
+            $ref: "#/definitions/GetNotFoundResponse"
+
 definitions:
   GetCourierPositionRequest:
     type: object
@@ -104,3 +122,23 @@ definitions:
       description:
         type: string
         example: "Courier is still in store"
+  GetAllCourierTotalDistanceResponse:
+    type: object
+    required:
+      - totalDistance
+    properties:
+      totalDistanceList:
+        type: array
+        items:
+          $ref: '#/definitions/CourierTotalDistance'
+  CourierTotalDistance:
+    type: object
+    required:
+      - courierId
+      - totalDistance
+    properties:
+      courierId:
+        type: string
+      totalDistance:
+        type: number
+        format: double

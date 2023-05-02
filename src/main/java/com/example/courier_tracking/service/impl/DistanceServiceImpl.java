@@ -1,6 +1,6 @@
 package com.example.courier_tracking.service.impl;
 
-import com.courier.swaggergen.model.GetCourierPositionResponse;
+import com.courier.swaggergen.model.CourierTotalDistance;
 import com.courier.swaggergen.model.GetCourierTotalDistanceResponse;
 import com.example.courier_tracking.exception.NotFoundException;
 import com.example.courier_tracking.model.CourierPosition;
@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -68,6 +71,30 @@ public class DistanceServiceImpl implements DistanceService {
 
         getCourierTotalDistanceResponse.setTotalDistance(courierPosition.getTotalDistance());
         return getCourierTotalDistanceResponse;
+    }
+
+    @Override
+    public List<CourierTotalDistance> getAllCourierTotalDistance() {
+        final List<CourierTotalDistance> responseList = new ArrayList<>();
+        final Map<String ,CourierPosition> courierPositionList = (Map<String, CourierPosition>)
+            Objects.requireNonNull(cacheManager.getCache("courierTotalDistance")).getNativeCache();
+
+        if (!courierPositionList.isEmpty()) {
+
+            for (Map.Entry<String, CourierPosition> set : courierPositionList.entrySet()) {
+                final CourierTotalDistance courierTotalDistance = new CourierTotalDistance();
+
+                courierTotalDistance.setTotalDistance(set.getValue().getTotalDistance());
+                courierTotalDistance.setCourierId(set.getKey());
+
+                responseList.add(courierTotalDistance);
+            }
+
+            } else {
+            throw new NotFoundException("Couriers has not been move yet");
+        }
+
+        return responseList;
     }
 
 }

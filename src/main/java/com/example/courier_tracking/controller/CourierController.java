@@ -1,6 +1,8 @@
 package com.example.courier_tracking.controller;
 
 import com.courier.swaggergen.controller.CourierApi;
+import com.courier.swaggergen.model.CourierTotalDistance;
+import com.courier.swaggergen.model.GetAllCourierTotalDistanceResponse;
 import com.courier.swaggergen.model.GetCourierPositionRequest;
 import com.courier.swaggergen.model.GetCourierPositionResponse;
 import com.courier.swaggergen.model.GetCourierTotalDistanceResponse;
@@ -13,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class CourierController implements CourierApi {
@@ -40,6 +44,17 @@ public class CourierController implements CourierApi {
         final @PathVariable String courierId) {
 
         final GetCourierTotalDistanceResponse response = distanceService.getTotalDistance(courierId);
+
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+    }
+
+    public ResponseEntity<GetAllCourierTotalDistanceResponse> getAllCourierTotalDistance() {
+        final List<CourierTotalDistance> getCourierTotalDistanceResponseList
+            = distanceService.getAllCourierTotalDistance();
+
+        final GetAllCourierTotalDistanceResponse response = new GetAllCourierTotalDistanceResponse();
+
+        response.setTotalDistanceList(getCourierTotalDistanceResponseList);
 
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
