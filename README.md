@@ -41,7 +41,7 @@ All json samples are shared on "Courier Tracking.postman_collection.json" file o
 ### GET /courier/totalDistance/{coruierId}
   Every "courier/position" request is saved to the application cache with courierId key. So after some of request with "courier/position" you can get total distance for every courier with courierId. If there is no movement for courier response is returned like "Courier has not been move yet".
  
-## GET /courier/totalDistance
+### GET /courier/totalDistance
   Get every courier which is saved to the app, list to the response.
       
   
