@@ -1,0 +1,110 @@
+swagger: '2.0'
+info:
+  description: |
+    Courier Tracking API.
+  version: "1.0.0"
+  title: Courier Tracking
+host: localhost:8080
+basePath: /courier
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /courier/position:
+    post:
+      tags:
+        - Courier all
+      summary: "Get position of courier"
+      description:
+        Get all current
+      operationId: getCourierPosition
+      parameters:
+        - in: body
+          name: getCourierPositionRequest
+          required: true
+          schema:
+            $ref: "#/definitions/GetCourierPositionRequest"
+      responses:
+        "200":
+          description: Success Response
+          schema:
+            $ref: "#/definitions/GetCourierPositionResponse"
+        "204":
+          description: Not found
+          schema:
+            $ref: "#/definitions/GetNotFoundResponse"
+        "500":
+          description: Internal Error
+          schema:
+            $ref: "#/definitions/GetErrorContent"
+
+  /courier/totalDistance/{courierId}:
+    get:
+      tags:
+        - Courier total distance
+      summary: "Get position of courier"
+      description:
+        Get all current
+      operationId: getCourierTotalDistance
+      parameters:
+        - name: courierId
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success Response
+          schema:
+            $ref: "#/definitions/GetCourierTotalDistanceResponse"
+        "404":
+          description: Not found
+          schema:
+            $ref: "#/definitions/GetNotFoundResponse"
+
+definitions:
+  GetCourierPositionRequest:
+    type: object
+    required:
+      - time
+      - courierId
+      - latitude
+      - longitude
+    properties:
+      time:
+        type: string
+      courierId:
+        type: string
+      latitude:
+        type: number
+        format: double
+      longtitude:
+        type: number
+        format: double
+  GetCourierPositionResponse:
+    type: object
+    properties:
+      time:
+        type: string
+      courierId:
+        type: string
+      storeName:
+        type: string
+  GetCourierTotalDistanceResponse:
+    type: object
+    required:
+      - totalDistance
+    properties:
+      totalDistance:
+        type: number
+        format: double
+  GetNotFoundResponse:
+    type: object
+    required:
+      - description
+    properties:
+      description:
+        type: string
+        example: "Courier is still in store"
