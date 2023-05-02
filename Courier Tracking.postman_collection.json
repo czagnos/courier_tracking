@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "1d100dee-6b17-4969-87f2-56f7321432a7",
+		"name": "Courier Tracking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14128206"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/courier/position",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"time\" : \"17:42:59\",\r\n    \"courierId\" : \"13\",\r\n    \"longtitude\": 29.0210292,\r\n    \"latitude\": 41.055783\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/courier/position",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"courier",
+						"position"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/courier/totalDistance/25",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/courier/totalDistance/11",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"courier",
+						"totalDistance",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/courier/totalDistance/25 Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/courier/totalDistance",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"courier",
+						"totalDistance"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
